@@ -1,9 +1,6 @@
-#!/usr/bin/python
-# encoding: utf-8
 
-import rosbag_pandas
 import matplotlib.pyplot as plt
-
+import rosbag
 import os
 
 import argparse
@@ -33,22 +30,25 @@ def buildParser():
     return parser
 
 
-def do_work(bag, include, exclude, output, fill, header):
-    # covert a lenght one value to a regex
+def bag2CSV(bag, include, exclude, output, fill, header):
+    # covert a length one value to a regex
     if include is not None and len(include) == 1:
         include = include[0]
 
-    # covert a lenght one value to a regex
+    # covert a length one value to a regex
     if exclude is not None and len(exclude) == 1:
         exclude = exclude[0]
+
     df = rosbag_pandas.bag_to_dataframe(bag, include=include, exclude=exclude, 
             parse_header=header)
+
     if fill:
         df = df.ffill().bfill()
 
     if output is None:
         base, _ = os.path.splitext(bag)
         output = base + '.csv'
+
     df = rosbag_pandas.clean_for_export(df)
     df.to_csv(output)
 
@@ -67,4 +67,4 @@ if __name__ == '__main__':
     fill = args.fill
     header = args.include_header
 
-    do_work(bag, include, exclude, output, fill, header)
+    bag2CSV(bag, include, exclude, output, fill, header)
