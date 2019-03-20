@@ -1,0 +1,5 @@
+# git will ignore these files
+
+*.html
+*.7z
+*.zip
