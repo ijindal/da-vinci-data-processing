@@ -22,6 +22,11 @@ rosbag decompress "file_name"
 
 Readbag.m
 
+## GUI development for ROS
+
+roscore &
+rqt_bag
+
 -----------
 More to come!!
 
