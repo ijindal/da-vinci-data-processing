@@ -14,5 +14,10 @@ At present this Repo contains files for reading Ros format files.
 |:---:|:---:|
 |id|1|
 
+## Decompress Rosbag file
+
+rosbag decompress "file_name"
+
 -----------
 More to come!!
+
