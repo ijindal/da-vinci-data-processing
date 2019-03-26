@@ -14,5 +14,19 @@ At present this Repo contains files for reading Ros format files.
 |:---:|:---:|
 |id|1|
 
+## Decompress Rosbag file
+
+rosbag decompress "file_name"
+
+## Reading Rosbag on Matlab
+
+Readbag.m
+
+## GUI development for ROS
+
+roscore &
+rqt_bag
+
 -----------
 More to come!!
+
