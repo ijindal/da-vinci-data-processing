@@ -18,7 +18,7 @@ At present this Repo contains files for reading Ros format files.
 
 `rosbag decompress "file_name"`
 
-## Reading Rosbag on Matlab
+## Reading Rosbag and decompress image on Matlab
 
 `Readbag.m'
 
