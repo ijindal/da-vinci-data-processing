@@ -20,3 +20,11 @@ end
 
 % img = reshape(data_left{2500,1}.Data(1:36300),  [330, 110]);
 % imshow(img)
+
+=======
+topic1 = bag.select('Topic','/camera2/usb_cam_right/image_raw/compressed');
+data1 = readMessages(topic1);
+img_data1 = readImage(data1{1,1});
+imshow(img_data1)
+
+
