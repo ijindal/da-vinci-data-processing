@@ -1,6 +1,6 @@
 
 import matplotlib.pyplot as plt
-import rosbag
+import rosbag_pandas
 import os
 
 import argparse
@@ -48,7 +48,7 @@ def bag2CSV(bag, include, exclude, output, fill, header):
     if output is None:
         base, _ = os.path.splitext(bag)
         output = base + '.csv'
-
+        
     df = rosbag_pandas.clean_for_export(df)
     df.to_csv(output)
 
