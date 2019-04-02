@@ -1,30 +1,34 @@
-% Author: Parinaz
+% Author: Parinaz & Ishan
 % Reading Ros files is quite easy withmatlab if you are working on Mac...
 % This file extract the image stream from the rosbag file.
+%
+clc;close all;clear all;
+%% Creat directories corresponding toeach subject for storing left and 
+% right camera images.
+rosbab_filename = '10_clutch_control_pattern4_sim.bag';
+subject_no = 10;
+[subj_dir, subj_leftimg_dir, subj_rightimg_dir] = createDirs(subject_no);
+%% Read rosebag files and select  image stream 
+bag = rosbag(rosbab_filename);
+
+img_right = bag.select('Topic','/camera2/usb_cam_right/image_raw/compressed');
+data_right = readMessages(img_right);
+% Wrie images in respective folders
+for i = 1:1:length(data_right)
+    img = readImage(data_right{i,1});
+    baseFileName = sprintf('Image_#%d.png', i);
+    fullFileName = fullfile(subj_rightimg_dir, baseFileName);
+    imwrite(img, fullFileName);
+end
 
 %% 
-clc;close all;clear all;
-
-%% Read rosebag files and select  image stream 
-bag = rosbag('10_clutch_control_pattern4_sim.bag');
-% bag_all = readMessages(bag);
-img_right = bag.select('Topic','/camera2/usb_cam_right/image_raw/compressed');
 img_left = bag.select('Topic','/camera1/usb_cam_left/image_raw/compressed');
-data_right = readMessages(img_right);
 data_left = readMessages(img_left);
-%%
-for i  = 1:1:624
-    out(i) = data_left{2500,1}.Data(i) - data_left{1500,1}.Data(i);
+
+% Wrie images in respective folders
+for i = 1:1:length(data_left)
+    img = readImage(data_left{i,1});
+    baseFileName = sprintf('Image_#%d.png', i);
+    fullFileName = fullfile(subj_leftimg_dir, baseFileName);
+    imwrite(img, fullFileName);
 end
-%%
-
-% img = reshape(data_left{2500,1}.Data(1:36300),  [330, 110]);
-% imshow(img)
-
-=======
-topic1 = bag.select('Topic','/camera2/usb_cam_right/image_raw/compressed');
-data1 = readMessages(topic1);
-img_data1 = readImage(data1{1,1});
-imshow(img_data1)
-
-
